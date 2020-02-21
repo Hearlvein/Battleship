@@ -10,6 +10,9 @@ public:
 	SetupPhase(sf::RenderWindow* window, Player* players, ResourceLibrary* resourceLibrary):
 		GamePhase(window, players, resourceLibrary)
 	{
+		m_infoText.setFont(*m_resourceLibrary->getFont());
+		m_infoText.setPosition(20.f, GRID_SIZE + 20.f);
+		updateInfoText();
 	}
 
 	virtual ~SetupPhase()
@@ -56,12 +59,20 @@ public:
 		if (m_endTurn && m_endTurnTimer.getElapsedTime() >= m_endTurnDelay)
 		{
 			if (m_currentPlayerTurn == 0)
+			{
 				m_currentPlayerTurn = 1;
+				updateInfoText();
+			}
 			else
 				m_phaseEnded = true;
 
 			m_endTurn = false;
 		}
+	}
+
+	void updateInfoText()
+	{
+		m_infoText.setString("Player " + int2string(m_currentPlayerTurn + 1) + " is playing");
 	}
 
 	void endTurn()
@@ -109,11 +120,14 @@ public:
 				m_window->draw(*m_resourceLibrary->get(SelectedTile));
 			}
 		}
+
+		m_window->draw(m_infoText);
 	}
 
 private:
 	std::vector<sf::Vector2u> m_positions;
 	sf::Clock m_endTurnTimer;
-	const sf::Time m_endTurnDelay = sf::milliseconds(100);
+	const sf::Time m_endTurnDelay = sf::seconds(2);
 	bool m_endTurn = false;
+	sf::Text m_infoText;
 };

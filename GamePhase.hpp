@@ -46,6 +46,16 @@ public:
 
 	virtual bool phaseEnded() const = 0;
 
+	Player* getCurrentPlayer() const
+	{
+		return &m_players[m_currentPlayerTurn];
+	}
+
+	Player* getOtherPlayer() const
+	{
+		return m_currentPlayerTurn == 0 ? &m_players[1] : &m_players[0];
+	}
+
 protected:
 	bool m_phaseEnded = false;
 	sf::RenderWindow* m_window;

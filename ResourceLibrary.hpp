@@ -8,6 +8,7 @@ public:
 	ResourceLibrary()
 	{
 		m_tileset.loadFromFile("tileset.png");
+		m_font.loadFromFile("lucida.ttf");
 
 		for (std::size_t i = 0; i < 4; ++i)
 			for (std::size_t j = 0; j < 5; ++j)
@@ -56,9 +57,15 @@ public:
         return nullptr;
 	}
 
+	const sf::Font* getFont() const
+	{
+		return &m_font;
+	}
+
 private:
 	// Defined here and shared to avoid multiple declaration (--optimization)
 	sf::Texture m_tileset;
+	sf::Font m_font;
 
 	/*
 		- from 0 to 9: a-j (x axis)

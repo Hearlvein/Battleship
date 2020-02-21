@@ -159,7 +159,7 @@ public:
 		for (std::vector<Ship>::iterator it = m_ships.begin(); it != m_ships.end(); ++it)
 		{
 			bool shipDestroyed = false;
-			
+
 			if (it->removeCell(x, y, shipDestroyed))
 			{
 				if (shipDestroyed)
@@ -174,6 +174,11 @@ public:
 
 		// Remove from ships grid
 		m_shipsGrid.set(x, y, HitTile);
+	}
+
+	bool hasNoShip() const
+	{
+        return m_ships.empty();
 	}
 
 private:

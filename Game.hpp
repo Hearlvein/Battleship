@@ -13,7 +13,7 @@ public:
 		m_players({Player(&m_window, &m_resourceLibrary), Player(&m_window, &m_resourceLibrary)})
 	{
 		// The room for two grids
-		m_window.create(sf::VideoMode(2 * GRID_SIZE, GRID_SIZE), "Battleship");
+		m_window.create(sf::VideoMode(2 * GRID_SIZE, GRID_SIZE + 100), "Battleship");
 
 		m_currentGamePhase = new SetupPhase(&m_window, m_players, &m_resourceLibrary);
 	}
